@@ -1,0 +1,7 @@
+1 Accounting
+2 Front Office
+3 Housekeeping
+4 Kitchen
+5 Purchasing
+6 Management
+7 Sales
