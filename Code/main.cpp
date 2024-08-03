@@ -15,7 +15,7 @@ void onTimer(int v) {
 // To display onto window using OpenGL commands
 void display() {
     // Draw window
-    glClearColor(0.4, 0.6, 1, 1.0);
+    glClearColor(0.7, 0.75, 0.7, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
     
     welcome();
@@ -92,7 +92,14 @@ void onSpecialKeyDown(int key, int x, int y) {
 // x, y is the coordinate of the point that mouse clicked.
 
 void onClick(int button, int stat, int x, int y) {
-    // Check if the game is over
+    
+    if(userValid){
+        if(x >50 && x < 250 && y > 135 && y < 165){
+            viewMode = 1;
+        }
+    }
+        
+    
   
 
     // To refresh the window it calls display() function
@@ -153,7 +160,7 @@ int main(int argc, char ** argv) {
         glutMouseFunc(onClick);
         
         // Timer Event
-        glutTimerFunc(TIMER_PERIOD/3, onTimer, 0);
+        glutTimerFunc(TIMER_PERIOD/8, onTimer, 0);
 
 
 
