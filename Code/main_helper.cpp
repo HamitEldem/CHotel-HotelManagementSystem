@@ -21,12 +21,15 @@
 sqlite3 *db;
 
 //-----------------------------------------------------------------------------------
+
 // Global Variables
 employee user;
 bool welcomeMessage = true;
 int inputMode = 0; // 0 for ID, 1 for password
 bool userValid = false;
 bool inputDone = false;
+int viewMode = 0;
+int roomFloor = 0;
 
 //-----------------------------------------------------------------------------------
 // SQL functions
@@ -143,6 +146,7 @@ void drawGradient(int x1, int y1, int w, int h, float r, float g, float b) {
 
 void welcome() {
     if (welcomeMessage) {
+        glColor3f(0, 0, 0);
         print(-100, 25, "Welcome to CHotel", GLUT_BITMAP_9_BY_15);
         print(-290, 0, "A Hotel Management System programmed with C and OpenGL GLUT", GLUT_BITMAP_9_BY_15);
         print(-100, -25, "by Hamit Efe Eldem", GLUT_BITMAP_9_BY_15);
@@ -150,12 +154,13 @@ void welcome() {
 }
 
 void loginScreen() {
-    glColor3f(1, 1, 1);
+    glColor3f(0, 0, 0);
     if (!welcomeMessage) {
         print(-100, 50, "CHotel Login Screen", GLUT_BITMAP_9_BY_15);
         print(-160, 0, "ID", GLUT_BITMAP_9_BY_15);
         print(-210, -25, "Password", GLUT_BITMAP_9_BY_15);
 
+        glColor3f(1, 1, 1);
         glRectf(-100, -2, 70, 15);
         glRectf(-100, -10, 70, -27);
 
@@ -188,11 +193,11 @@ void userScreen() {
     getUser(user.id, user.name, user.surname);
 
     // Sidebar
-    glColor3f(0.9, 0.9, 1);
+    glColor3f(0.3, 0.3, 0.3);
     glRectf(-WINDOW_WIDTH / 2, -WINDOW_HEIGHT / 2, -WINDOW_WIDTH / 2 + 300, WINDOW_HEIGHT / 2);
 
     // Profile bar
-    glColor3f(0.1, 0.1, 0.5);
+    glColor3f(0.4, 0.55, 0.65);
     glRectf(-WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 - 100, -WINDOW_WIDTH / 2 + 300, WINDOW_HEIGHT / 2);
 
     // Profile picture
@@ -204,4 +209,78 @@ void userScreen() {
     // Name printing
     glColor3f(1, 1, 1);
     vprint(-WINDOW_WIDTH / 2 + 90, WINDOW_HEIGHT / 2 - 55, GLUT_BITMAP_HELVETICA_18, "%s %s", user.name, user.surname);
+    
+    frontOfficeModule();
+}
+
+
+void frontOfficeModule(){
+    //design of ui
+    
+    //sidebar
+    
+    //spec 1: room view
+    glColor3f(0, 0, 0);
+    
+    //seperator line
+    glBegin(GL_LINES);
+        glVertex2f(-WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2 - 200);
+        glVertex2f(-WINDOW_WIDTH / 2 + 300, WINDOW_HEIGHT / 2 - 200);
+    glEnd();
+    
+    //button box & text
+    drawGradient(-WINDOW_WIDTH / 2 +50, WINDOW_HEIGHT / 2 - 135, 200, 30, 0.6, 0.6, 0.6);
+    print(-WINDOW_WIDTH / 2 + 70,  WINDOW_HEIGHT / 2 - 155, "Room Management", GLUT_BITMAP_HELVETICA_18);
+    
+    switch (viewMode){
+        case 1:
+            //button box & text
+            drawGradient(-WINDOW_WIDTH / 2 +50, WINDOW_HEIGHT / 2 - 135, 200, 30, 0.3, 0.9, 0.3);
+            print(-WINDOW_WIDTH / 2 + 70,  WINDOW_HEIGHT / 2 - 155, "Room Management", GLUT_BITMAP_HELVETICA_18);
+            
+            roomManagement();
+            
+            
+            
+            
+            
+    }
+
+    
+}
+
+void roomManagement(){
+    int i;
+    int roomNumber;
+    
+    glRectf(-350, -350  , 650, 300);
+    
+    
+    
+    glColor3f(1, 1, 1);
+    
+    
+    for(i = 0; i < 19; i++){
+        roomNumber = roomFloor * 100 + i;
+    
+        // draw rooms
+        
+        if(i < 10){
+            drawLine(-350 + 100 * i, -350 + 100 * i, 300, 50);
+        }
+        else{
+            drawLine(-350 + 100 * (i-9), -350 + 100 * (i-9), -350, -100);
+        }
+        
+        drawLine(-350, 650, 50, 50);
+        drawLine(-350, 650, -100, -100);
+        
+    }
+}
+
+void drawLine(int x1, int x2, int y1, int y2){
+    glBegin(GL_LINES);
+        glVertex2f(x1, y1);
+        glVertex2f(x2, y2);
+    glEnd();
 }
