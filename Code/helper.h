@@ -45,6 +45,8 @@ extern bool welcomeMessage;
 extern int inputMode; // 0 for ID, 1 for password
 extern bool userValid;
 extern bool inputDone;
+extern int viewMode;
+extern int roomFloor;
 
 //-----------------------------------------------------------------------------------
 // SQL function prototypes
@@ -63,6 +65,9 @@ void drawGradient(int x1, int y1, int w, int h, float r, float g, float b);
 void welcome();
 void loginScreen();
 void userScreen();
+void frontOfficeModule();
+void roomManagement();
+void drawLine(int x1, int x2, int y1, int y2);
 
 #endif /* glut_helper_h */
 
