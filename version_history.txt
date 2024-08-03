@@ -1,0 +1,23 @@
+Version History
+
+v0 - August 02 2024 - 
+Initial version
+
+*Database formation
+*Login Screen
+*User Validation
+
+v0.1 - August 03 2024 -
+
+* rooms.csv has been changed
+	check in date, reservation price and additional services column have been added
+* warehouse.csv and menu.csv have been updated
+*database has been updated
+* started to code
+		void userScreen();
+		void frontOfficeModule();
+		void roomManagement();
+		void drawLine(int x1, int x2, int y1, int y2);
+
+
+
